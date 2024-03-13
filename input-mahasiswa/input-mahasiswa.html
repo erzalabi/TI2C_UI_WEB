@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Belajar Javascript</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="box">
+      <span class="borderLine"></span>
+      <form id="studentForm">
+        <h2>Sign In</h2>
+        <div class="inputBox">
+          <input type="number" id="nim" name="nim" required="required" />
+          <span>NIM</span>
+          <i></i>
+        </div>
+        <div class="inputBox">
+          <input type="text" id="name" name="name" required="required" />
+          <span>NAMA</span>
+          <i></i>
+        </div>
+        <button type="button" onclick="saveStudent()">Login</button>
+      </form>
+    </div>
+
+    <table id="studentTable" style="width: 400">
+      <thead>
+        <tr>
+          <th style="width: 30%">NIM</th>
+          <th style="width: 70%">Nama</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script>
+      // Define array untuk list mahasiswa
+      var arrStudent = [];
+
+      // Define object mahasiswa
+      function Student(nim, name) {
+        this.nim = nim;
+        this.name = name;
+      }
+
+      // Fungsi simpan data mahasiswa
+      function saveStudent() {
+        // Deklarasi variable dr id element input
+        var studentForm = document.getElementById("studentForm");
+        var nim = document.getElementById("nim").value;
+        var name = document.getElementById("name").value;
+
+        // Buat student object baru
+        var student = new Student(nim, name);
+        arrStudent.push(student);
+        // Reset Form
+        studentForm.reset();
+        // Tampilkan data yang ditambahkan >> fungsi show
+        showStudent(student);
+      }
+
+      // Menampilkan data mahasiswa ke HTML
+      function showStudent(student) {
+        var tbody = document.querySelector("#studentTable tbody");
+        var tr = document.createElement("tr");
+        // buat kolom value nim
+        var tdNim = document.createElement("td");
+        tdNim.textContent = student.nim;
+        tr.appendChild(tdNim);
+
+        // buat kolom value nama
+        var tdNama = document.createElement("td");
+        tdNama.textContent = student.name;
+        tr.appendChild(tdNama);
+
+        tbody.appendChild(tr);
+
+        // Tampilkan log dan Simpan data ke array
+        console.log(student);
+        console.log(arrStudent);
+      }
+    </script>
+  </body>
+</html>
